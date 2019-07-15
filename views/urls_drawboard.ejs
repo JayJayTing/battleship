@@ -1,0 +1,74 @@
+<html>
+
+<div class='inline'>
+<% for(var y = board.length -1; y >= 0; y--){%>
+    <form method="POST" action ="/drawboard">
+    <% for(var x = 0; x < board.length; x++){%>
+        <%  if(board[x][y].occupancy && board[x][y].hit){%>
+            <%if(x === 0){%>
+                <%=y%> 
+                
+                <button type = "submit" class = "btn btn-primary" name ="button" value="<%=x%><%=y%>" id = "<%=x%><%=y%>">
+                    X
+                </button>
+                 
+            <%}else{%>
+                        
+                        <button type = "submit" class = "btn btn-primary"name ="button" value="<%=x%><%=y%>"id = "<%=x%><%=y%>">
+                            X
+                        </button>
+                        
+            <%}%>
+        <%}else if(board[x][y].occupancy){%>
+            <%if(x === 0){%>
+                <%=y%>
+                            
+                            <button type = "submit" class = "btn btn-primary"name ="button" value="<%=x%><%=y%>"id = "<%=x%><%=y%>">
+                                 B
+                            </button>
+                            
+            <%}else{%>
+                        
+                        <button type = "submit" class = "btn btn-primary"name ="button" value="<%=x%><%=y%>"id = "<%=x%><%=y%>">
+                            B
+                        </button>
+                        
+            <%}%>
+        <%}else{%>
+            <%if(x === 0){%>
+                <%=y%>
+                            
+                            <button type = "submit" class = "btn btn-primary"name ="button" value="<%=x%><%=y%>"id = "<%=x%><%=y%>">
+                                 ~
+                            </button>
+                        
+            <%}else{%>
+                        
+                        <button type = "submit" class = "btn btn-primary"name ="button" value="<%=x%><%=y%>"id = "<%=x%><%=y%>">
+                         ~
+                        </button>
+                        
+            <%}%>
+                    
+        <%}%>
+    
+    <% }%>
+</form>
+<% }%>
+X
+<%for(var a = 0; a < board.length; a++){%>
+    .<%=a%>..
+    <%}%>
+
+</div>          
+    
+
+            
+
+
+
+
+</html>
+
+
+

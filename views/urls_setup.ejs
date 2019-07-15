@@ -1,0 +1,35 @@
+<html>
+    <body>
+        <h2>Setup</h2>
+        <form method= "POST" action="/drawboard" >
+            
+            Set Number of Rows and Columns:<input class= "form-control" type="number" name ="columns"></br>
+            
+        
+        <% for(var i = 0; i < 4; i ++){%>    
+            x<%=i%> coordinate: <input class= "form-control" type="number" id = "x<%=i%>" name = "x<%=i%>"></br>
+
+            y<%=i%> coordinate: <input class= "form-control" type="number" id = "y<%=i%>" name = "y<%=i%>" ></br>
+            
+            size of ship <%=i%>: <input class= "form-control" type="number" id = "size<%=i%>" name = "size<%=i%>"></br>
+
+            direction of ship <%=i%>: <input class= "form-control" type="text" id = "direction<%=i%>" name ="direction<%=i%>"></br></br>
+
+        <%}%>
+            
+
+
+            
+
+            <button type="submit" id = "submit">Draw Board</button>
+
+        </form>
+        <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+        </script>
+        <script type = "text/javascript" src= "/scripts/setup.js"></script>
+        
+    </body>
+</html>
