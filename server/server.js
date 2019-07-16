@@ -8,6 +8,7 @@ const app = express();
 const drawBoard = require("./non-server/postDrawboard");
 var bodyParser = require('body-parser')
 app.set("view engine", "ejs");
+app.set('views', '../views');
 app.use(bodyParser.urlencoded({extended: true}));
 //let gm = new GmCommands();
 
@@ -18,6 +19,7 @@ app.use(express.static("public"));
 
 
 app.get('/', (req, res) => {
+    //res.render("urls_setup");
     
     res.render("urls_homepage");
   });
@@ -27,18 +29,39 @@ app.get('/', (req, res) => {
     console.log(`Listening on port ${PORT}!`);
   });
 
-  app.post("/setup", (req, res) =>{
+  app.post("/homeSetup", (req, res) =>{
+    //drawboard.boardInit(req, res, 1);
     res.render("urls_setup");
   } )
 
+  app.post("/setup", (req, res)=>{
+  
+    drawBoard.boardInit(req, res, 1);
+  
+    res.redirect("/setup2");
+  })
+  app.post("/setup2", (req, res)=>{
+    drawBoard.boardInit(req, res, 2);
+    console.log("this is working");
+    res.render("urls_setup2");
+  })
+  app.get("/setup2", (req, res)=>{
+    //drawBoard.boardInit(req, res, 2);
+    console.log("this is GeT");
+    res.render("urls_setup2");
+  })
+
   app.post("/drawboard",(req,res)=>{
-      if(req.body.columns){
-        //first time board setup
-        drawBoard.boardInit(req, res);
-      }else{
-        //This controls the button commands
-       drawBoard.boardUpdate(req, res);
-      }
+      // if(req.body.columns){
+      //   //first time board setup
+      //   drawBoard.boardInit(req, res);
+      // }else{
+      //   //This controls the button commands
+      //  drawBoard.boardUpdate(req, res);
+      // }
+    console.log("drawing board")
+    
+      drawBoard.boardUpdate(req, res);
       
       
       
@@ -49,9 +72,9 @@ app.get('/', (req, res) => {
 
   //simplifying functions
 
-  function boardInit(req, res){
+  function boardInit(req, res, boardNumber){
     var board = gm.createBoard(req.body.columns, req.body.columns, gm.createTile);
-    database["board"] = board;
+    database[`board${boardNumber}`] = board;
     //testing
     let x = parseInt(req.body.x);
     let y = parseInt(req.body.y);

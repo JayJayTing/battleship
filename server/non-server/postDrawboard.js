@@ -2,12 +2,12 @@
 const database = require("../Database/database");
 const gm = database.gm;
 //initializes board
-function boardInit(req, res){
+function boardInit(req, res, boardNumber){
     var board = gm.createBoard(req.body.columns, req.body.columns, gm.createTile);
-    database["board"] = board;
+    database[`board${boardNumber}`] = board;
     //testing
 
-  for(let i = 0; i < 4; i ++){
+  for(let i = 0; i < 1; i ++){
     let x = parseInt(req.body[`x${i}`]);
     
     let y = parseInt(req.body[`y${i}`]);
